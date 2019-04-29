@@ -3,13 +3,15 @@ import Drawable from "./abstract/Drawable"
 class Field extends Drawable {
   image: any
   contents: any[]
+  fillColour: string = ""
 
   constructor(
     xPos: number,
     yPos: number,
     w: number,
     h: number,
-    initalContents: any[] = []
+    initalContents: any[] = [],
+    fillColour: string = "#b58969"
   ) {
     super()
     this.width = w
@@ -17,12 +19,13 @@ class Field extends Drawable {
     this.x = xPos
     this.y = yPos
     this.contents = initalContents
+    this.fillColour = fillColour
   }
 
   public draw() {
     this.p5.stroke("#7c4011")
     this.p5.strokeWeight(10)
-    this.p5.fill("#b58969")
+    this.p5.fill(this.fillColour)
     this.p5.rect(this.x, this.y, this.width, this.height, 10)
 
     for (var item of this.contents) { 

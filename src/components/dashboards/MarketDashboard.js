@@ -12,6 +12,13 @@ class MarketDashboard extends Component {
     }
   }
 
+  sellItem = item => {
+    if(item === "milk"){
+      this.props.market.currentFarmer.myFarm.milk.total -= 1
+        this.props.market.currentFarmer.budget += this.props.market.milkPrice
+    } 
+  }
+
   render() {
     return (
       <div className="MarketDashboard">
@@ -34,8 +41,10 @@ class MarketDashboard extends Component {
         <dl>
           <dt>Milk</dt>
           <dd>{this.props.market.milkPrice} per pint</dd>
+          <button onClick={() => this.sellItem("milk")}>Sell milk</button>
           <dt>Beef</dt>
           <dd>{this.props.market.beefPrice} per unit</dd>
+          <button onClick={() => this.sellItem("beef")}>Sell beef</button>
         </dl>
       </div>
     )
