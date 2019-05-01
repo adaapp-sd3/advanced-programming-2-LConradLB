@@ -3,6 +3,7 @@ import Field from "./Field"
 import Cow from "./animals/Cow"
 import Sheep from "./animals/Sheep"
 import Chicken from "./animals/Chicken"
+import FieldType from "./abstract/FieldType";
 class Farm extends Drawable {
   fields: Field[] = []
   width: number = 700
@@ -19,6 +20,8 @@ class Farm extends Drawable {
   beef: any
   chicken: any
   seeds: any
+  solarPanels: any
+  greenGas: any
   constructor(
     cows: any = {
       name: "Cows",
@@ -79,6 +82,16 @@ class Farm extends Drawable {
       name: "Grass seeds",
       total: 0,
       unit: "bunches"
+    },
+    solarPanels: any = {
+      name: "Solar Panels",
+      total: 0,
+      unit: "units"
+    },
+    greenGas: any = {
+      name: "Green Gas",
+      total: 0,
+      unit: "litres"
     }
   ) {
     super()
@@ -94,10 +107,42 @@ class Farm extends Drawable {
     this.lamb = lamb
     this.beef = beef
     this.chicken = chicken
+    this.solarPanels = solarPanels
+    this.greenGas = greenGas
   }
 
   public preload() {
     this.createBasicFarm()
+  }
+
+  createSheep(){
+    let sheep = new Sheep(this)
+    sheep.p5 = this.p5
+    sheep.preload()
+    sheep.setRandomPositionInField(25, 275, 350, 125)
+    this.sheep.objects.push(sheep)
+  }
+
+  createCow(){
+    let cow = new Cow(this)
+      cow.p5 = this.p5
+      cow.preload()
+      cow.setRandomPositionInField(
+        25,
+        25,
+        250,
+        175
+      )
+      this.cows.objects.push(cow)
+  }
+
+  createChicken(){
+    let chicken = new Chicken(this)
+      chicken.p5 = this.p5
+      chicken.preload()
+      chicken.setRandomPositionInField(25, 450, 300, 125)
+      
+      this.chickens.objects.push(chicken)
   }
 
   private createBasicFarm = () => {
@@ -108,36 +153,17 @@ class Farm extends Drawable {
 
     //Cows
     for (let i = 0; i < this.cows.total; i++) {
-      let cow = new Cow(this)
-      cow.p5 = this.p5
-      cow.preload()
-      cow.setRandomPositionInField(
-        firstFieldX,
-        firstFieldY,
-        firstFieldW,
-        firstFieldH
-      )
-      this.cows.objects.push(cow)
+      this.createCow()
     }
 
     //Sheep
     for (let i = 0; i < this.sheep.total; i++) {
-      let sheep = new Sheep(this)
-      sheep.p5 = this.p5
-      sheep.preload()
-      sheep.setRandomPositionInField(25, 275, 350, 125)
-      
-      this.sheep.objects.push(sheep)
+    this.createSheep()
     }
 
     //Chicken
     for (let i = 0; i < this.chickens.total; i++) {
-      let chicken = new Chicken(this)
-      chicken.p5 = this.p5
-      chicken.preload()
-      chicken.setRandomPositionInField(25, 450, 300, 125)
-      
-      this.chickens.objects.push(chicken)
+      this.createChicken()
     }
 
     this.fields.push(
@@ -151,8 +177,8 @@ class Farm extends Drawable {
       )
     )
     this.fields.push(new Field(25, 275, 350, 125, this.sheep.objects, "#065535"))
-    this.fields.push(new Field(475, 25, 200, 325,[],"#ff8969"))
-    this.fields.push(new Field(25, 450, 300, 125, this.chickens.objects))
+    this.fields.push(new Field(475, 25, 200, 325,[],"#ff8969", FieldType.Infrastructure))
+    this.fields.push(new Field(25, 450, 300, 125, this.chickens.objects, "", FieldType.Grazing))
     for (let field of this.fields) {
       field.p5 = this.p5
       field.setHandleUpdate = this.updateUI
