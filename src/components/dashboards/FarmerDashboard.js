@@ -11,7 +11,6 @@ class FarmerDashboard extends Component {
       <div className="FarmerDashboard">
         <dl>
           <dt>Current budget</dt><dd>{this.props.farmer.budget}</dd>
-          {console.log(this.props.farmer.myFarm)}
           {this.props.farmer.myFarm && (<>
             <dt>Total cows</dt><dd>{this.props.farmer.myFarm.cows.total}</dd>
             <dt>Total sheep</dt><dd>{this.props.farmer.myFarm.sheep.total}</dd>
@@ -27,6 +26,10 @@ class FarmerDashboard extends Component {
             <dt>Total seeds</dt><dd>{this.props.farmer.myFarm.seeds.total} bunches</dd>
             <dt>Total Eggs</dt><dd>{this.props.farmer.myFarm.eggs.total} eggs</dd>
             <dt>Total Wool</dt><dd>{this.props.farmer.myFarm.wool.total} kg</dd>
+
+            <dt>Total Beef</dt><dd>{this.props.farmer.myFarm.beef.total} kg</dd>
+            <dt>Total Lamb</dt><dd>{this.props.farmer.myFarm.lamb.total} kg</dd>
+            <dt>Total Chicken</dt><dd>{this.props.farmer.myFarm.chicken.total} kg</dd>
 
             </>
           )}

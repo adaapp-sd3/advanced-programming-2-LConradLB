@@ -8,6 +8,48 @@ class FieldDashboard extends Component {
     }
   }
 
+  yieldBeef = () => {
+    //Have to start from the back of the list as we are setting the health to 0
+    //then on each draw loop we are checking whether the health is less than or == 0
+    //if true. Pop() from the array.
+    //Can't start at front as the health would be 0 and it would pop from the end of the array
+    //leaving you with 0 cows.
+    let length = this.props.field.contents.length
+    let midPoint = length/2
+    let cows = this.props.field.contents[0].farm.cows
+    for (var i=length-1; i>midPoint; i--) {
+      cows.objects[i].yieldBeef()
+    }
+  }
+
+  yieldLamb = () => {
+    //Have to start from the back of the list as we are setting the health to 0
+    //then on each draw loop we are checking whether the health is less than or == 0
+    //if true. Pop() from the array.
+    //Can't start at front as the health would be 0 and it would pop from the end of the array
+    //leaving you with 0 cows.
+    let length = this.props.field.contents.length
+    let midPoint = length/2
+    let sheep = this.props.field.contents[0].farm.sheep
+    for (var i=length-1; i>midPoint; i--) {
+      sheep.objects[i].yieldLamb()
+    }
+  }
+
+  yieldChicken = () => {
+    //Have to start from the back of the list as we are setting the health to 0
+    //then on each draw loop we are checking whether the health is less than or == 0
+    //if true. Pop() from the array.
+    //Can't start at front as the health would be 0 and it would pop from the end of the array
+    //leaving you with 0 cows.
+    let length = this.props.field.contents.length
+    let midPoint = length/2
+    let chickens = this.props.field.contents[0].farm.chickens
+    for (var i=length-1; i>midPoint; i--) {
+      chickens.objects[i].yieldChicken()
+    }
+  }
+
   shearSheep = () => {
     for (var i=0; i<this.props.field.contents.length; i++) {
       this.props.field.contents[i].yieldWool()
@@ -29,21 +71,30 @@ class FieldDashboard extends Component {
             In this field you have {this.props.field.contents.length}{" "}
             {this.props.field.contents[0].name}s
 
-            {/*  */}
             {this.props.field.contents[0].name === "Cow" && (
-              <button onClick={this.milkCows}>Milk them</button>
+              <div>
+                <button onClick={this.milkCows}>Milk them</button>
+                <button onClick={this.yieldBeef}>Get beef from half of the cows</button>
+              </div>
             )}
 
             {this.props.field.contents[0].name === "Sheep" && (
-              <button onClick={this.shearSheep}>Shear them</button>
+              <div>
+                <button onClick={this.shearSheep}>Shear them</button>
+                <button onClick={this.yieldLamb}>Get lamb from half of the sheep</button>
+              </div>
             )}
 
             {this.props.field.contents[0].name === "Chicken" && (
-              <button onClick={this.collectEggs}>Harvest eggs</button>
+              <div>
+                <button onClick={this.collectEggs}>Harvest eggs</button>
+                <button onClick={this.yieldChicken}>Get chicken from half of the chickens</button>
+              </div>
             )}
           </p>
           
         )}
+        
         {this.props.field.contents.map((item, i) => (
           <>
             {item.showUI && (

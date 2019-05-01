@@ -42,7 +42,6 @@ class Chicken extends Animal {
 
   public preload() {
     this.p5Img = this.p5.loadImage(this.imgUrl)
-    console.log(this.p5Img)
   }
 
   makeSound() {
@@ -55,6 +54,7 @@ class Chicken extends Animal {
     }
     if(this.health <= 0){
       this.farm.chickens.objects.pop()
+      this.farm.chickens.total -= 1
     }
   }
 

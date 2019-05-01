@@ -23,7 +23,7 @@ class Sheep extends Animal {
   // if sheep is thin, yield less Lamb
   yieldLamb() {
     this.farm.lamb.total += this.hunger > 0 ? 100 / this.hunger : 120
-    this.hunger += 1
+    this.health = 0
   }
 
   eatStraw() {
@@ -42,7 +42,7 @@ class Sheep extends Animal {
 
   public preload() {
     this.p5Img = this.p5.loadImage(this.imgUrl)
-    console.log(this.p5Img)
+    // console.log(this.p5Img)
   }
 
   makeSound() {
@@ -51,11 +51,11 @@ class Sheep extends Animal {
 
   checkHealth(){
     if(this.hunger >= 5){
-        console.log("Dying", this.health)
         this.health -= 1
     }
     if(this.health <= 0){
       this.farm.sheep.objects.pop()
+      this.farm.sheep.total -= 1
     }
   }
 
