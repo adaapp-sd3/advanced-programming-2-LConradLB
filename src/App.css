@@ -26,3 +26,54 @@
 .App-link {
   color: #61dafb;
 }
+
+.FarmManager {
+  display: inline-flex;
+  width:100%;
+}
+
+.FarmerDashboard {
+  min-width:30%;
+  width: 2vmin;
+  background-color: red;
+}
+
+.MarketProducts{
+  display: inline-flex;
+  width: 100%;
+}
+
+.MarketDashboard{
+  width: 100%;
+}
+.HeadingCentreInformation{
+
+}
+
+.BuyInfomation{
+  width:50%;
+}
+
+.SellInformation{
+  width:50%;
+}
+
+.FieldDashboard{
+  width: 100%;
+}
+
+.Item button{
+  margin-top: 5px;
+}
+
+.Item dd{
+  text-align: left;
+  left-margin: 0px;
+}
+
+.Item{
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+}
