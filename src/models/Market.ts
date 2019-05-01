@@ -12,11 +12,14 @@ class Market extends Drawable {
   milkPrice: number = 1
   beefPrice: number = 25
   greenGasPrice: number = 10
-  
-
+  eggPrice: number = 2
+  woolPrice: number = 30
   solarPanelPrice: number = 10000
-
   grassSeedPrice: number = 1
+
+  animal_chickenPrice: number = 20
+  animal_sheepPrice: number = 40
+  animal_cowPrice: number = 60
 
 
   constructor() {

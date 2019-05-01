@@ -15,7 +15,7 @@ abstract class ConstrainedByField extends Drawable {
     fieldW: number,
     fieldH: number
   ) {
-    this.x = Math.floor(Math.random() * (fieldW - this.width)) + fieldX
+    this.x = Math.floor(Math.random() * fieldW) + fieldX
     this.y = Math.floor(Math.random() * (fieldH - this.height * 2)) + fieldY
     this.fieldX = fieldX
     this.fieldY = fieldY
@@ -27,11 +27,11 @@ abstract class ConstrainedByField extends Drawable {
   //bounces the animal off edges of the field
   constrainItem() {
     // bottom
-    if (this.y - this.height + 1 >= this.fieldY + this.fieldH - this.height) {
+    if (this.y - this.height + 6 >= this.fieldY + this.fieldH - this.height) {
       this.velocityY = -this.velocityY * this.bounceSpeed
       this.y = this.fieldY + this.fieldH - this.height - 1
     }
- 
+
     //top
     if (this.y <= this.fieldY) {
       this.velocityY = -this.velocityY * this.bounceSpeed
@@ -45,21 +45,14 @@ abstract class ConstrainedByField extends Drawable {
     }
 
     // right
-    if (this.x + this.width / 2 >= this.fieldW) {
+    if (this.x + this.width / 2 >= this.fieldW + this.fieldX ){
       this.velocityX = -this.velocityX * this.bounceSpeed
       this.x = this.fieldW - this.width / 2 - 1
     }
   }
 
   doSomethingOccasionally(doThis: Function) {
-    if (Math.floor((this.p5.millis() * 1000) % 100) === 0) {
-      doThis()
-      this.velocityX = Math.random() >= 0.5 ? -0.1 : 0.1
-      this.velocityY = Math.random() >= 0.5 ? -0.1 : 0.1
-      let chanceOfStayingStill = Math.random()
-      this.velocityX = chanceOfStayingStill >= 0.1 ? 0 : this.velocityX
-      this.velocityY = chanceOfStayingStill >= 0.1 ? 0 : this.velocityY
-    }
+  doThis()
   }
 
   stopForFarmer() {

@@ -1,6 +1,7 @@
 import Drawable from "./abstract/Drawable"
 import Farm from "./Farm"
 import Market from "./Market"
+import FieldType from "./abstract/FieldType";
 
 class Farmer extends Drawable {
   myFarm!: Farm
@@ -51,18 +52,26 @@ class Farmer extends Drawable {
       if (field.containsPoint(this.x + this.height, this.y + this.width)) {
         this.farmerCurrentLocation = field
         field.farmerPresent = true
+        if(field.type === FieldType.Infrastructure){
+          if(this.myFarm.solarPanels.total > 0){
+            if(this.myFarm.solarPanels.total > 0){
+              field.placeInfrastructure(this.x, this.y, "solar panel")
+              this.myFarm.solarPanels.total -= 1
+            }
+          }
+        }
       } else {
         field.farmerPresent = false
       }
     }
-    if (
-      this.localMarket.containsPoint(this.x + this.height, this.y + this.width)
-    ) {
+
+    if (this.localMarket.containsPoint(this.x + this.height, this.y + this.width)) {
       this.farmerCurrentLocation = this.localMarket
       this.localMarket.farmerPresent = true
     } else {
       this.localMarket.farmerPresent = false
     }
+
     if (this.currentLocation && this.currentLocation.contents) {
       for (var item of this.currentLocation.contents) {
         if (item.containsPoint(this.x + this.height, this.y + this.width)) {
