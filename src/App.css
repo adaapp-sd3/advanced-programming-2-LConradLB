@@ -13,10 +13,11 @@
 }
 
 .App-header {
+  width:100%;
   background-color: #282c34;
   min-height: 3rem;
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
+  flex-direction: horizontal;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -51,11 +52,11 @@
 }
 
 .BuyInfomation{
-  width:50%;
+  width:100%;
 }
 
 .SellInformation{
-  width:50%;
+  width:100%;
 }
 
 .FieldDashboard{
@@ -76,4 +77,24 @@
   margin-top: 5px;
   margin-bottom: 10px;
   margin-left: 50px;
+  width: max-content;
+  display: inline-block;
+}
+
+.Button{
+  display: inline-block;
+  margin: 5px;
+  padding: 0.75rem 1rem;
+	border: 0;
+	border-radius: 0.317rem;
+	background-color: #aaa;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 1rem;
+  line-height: 1.5;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	cursor: pointer;
+	-webkit-appearance: none;
+	-webkit-font-smoothing: antialiased;
 }
