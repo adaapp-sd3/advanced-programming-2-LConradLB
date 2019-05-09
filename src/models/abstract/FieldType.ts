@@ -1,7 +1,7 @@
 enum FieldType{
-    Grazing,
-    Infrastructure,
-    Planting
+    Grazing = "Grazing",
+    Infrastructure = "Infrastructure",
+    Planting = "Crop"
   }
 
 export default FieldType

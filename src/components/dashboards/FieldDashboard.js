@@ -66,6 +66,7 @@ class FieldDashboard extends Component {
     return (
       <div className="FieldDashboard">
         <h2>Field</h2>
+        <p>Field Type: {this.props.field.type} <br/></p>
         {this.props.field.contents[0] && (
           <p>
             In this field you have {this.props.field.contents.length}{" "}
@@ -73,22 +74,22 @@ class FieldDashboard extends Component {
 
             {this.props.field.contents[0].name === "Cow" && (
               <div>
-                <button onClick={this.milkCows}>Milk them</button>
-                <button onClick={this.yieldBeef}>Get beef from half of the cows</button>
+                <button className="Button" onClick={this.milkCows}>Milk them</button>
+                <button className="Button" onClick={this.yieldBeef}>Get beef from half of the cows</button>
               </div>
             )}
 
             {this.props.field.contents[0].name === "Sheep" && (
               <div>
-                <button onClick={this.shearSheep}>Shear them</button>
-                <button onClick={this.yieldLamb}>Get lamb from half of the sheep</button>
+                <button className="Button" onClick={this.shearSheep}>Shear them</button>
+                <button className="Button" onClick={this.yieldLamb}>Get lamb from half of the sheep</button>
               </div>
             )}
 
             {this.props.field.contents[0].name === "Chicken" && (
               <div>
-                <button onClick={this.collectEggs}>Harvest eggs</button>
-                <button onClick={this.yieldChicken}>Get chicken from half of the chickens</button>
+                <button className="Button" onClick={this.collectEggs}>Harvest eggs</button>
+                <button className="Button" onClick={this.yieldChicken}>Get chicken from half of the chickens</button>
               </div>
             )}
           </p>
