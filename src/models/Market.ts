@@ -4,7 +4,8 @@ import Farmer from './Farmer';
 class Market extends Drawable {
   imgUrl = "/img/twtr/1f3e2.png"
   currentFarmer!: Farmer
-  
+  currentMarketTab: MarketTab = MarketTab.Buy
+
   greenGasDemand: number = 100
   milkDemand: number = 75
   beefDemand: number = 75
@@ -20,6 +21,13 @@ class Market extends Drawable {
   animal_chickenPrice: number = 20
   animal_sheepPrice: number = 40
   animal_cowPrice: number = 60
+
+  food_cornPrice: number = 10
+  food_strawPrice: number = 10
+
+  meat_chickenPrice: number = 3
+  meat_lambPrice: number = 7
+
 
 
   constructor() {
@@ -41,6 +49,19 @@ class Market extends Drawable {
   public draw() {
     this.p5.image(this.p5Img, this.x, this.y, this.width, this.height)
   }
+
+  public toggleTab(){
+    if (this.currentMarketTab == MarketTab.Buy){
+      this.currentMarketTab = MarketTab.Sell
+    }else{
+      this.currentMarketTab = MarketTab.Buy
+    }
+  }
+}
+
+enum MarketTab{
+  Buy,
+  Sell
 }
 
 export default Market
