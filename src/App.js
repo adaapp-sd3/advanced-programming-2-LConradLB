@@ -15,12 +15,19 @@ class App extends Component {
     market: new Market()
   }
 
+
+
   // allow instances to to tell us when they change
   handleUpdateState = newThing => {
     this.setState(newThing)
   }
 
-  //
+  saveGame(){
+    if(this){
+      console.log(this.state.farmer)
+    }
+  }
+
   componentDidMount() {
     let sketch = makeFarm(
       this.state.farm,
@@ -41,6 +48,7 @@ class App extends Component {
             <img src="/img/farmer.png" className="App-logo" alt="logo" />{" "}
             Dashboard
           </h2>
+          <button className="Button" onClick={this.saveGame}>Save Game</button>
         </header>
         <FarmManager farmer={this.state.farmer} farm={this.state.farm} market={this.state.market} />
       </div>
