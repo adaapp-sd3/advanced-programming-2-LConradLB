@@ -1,6 +1,15 @@
 import React, { Component } from "react"
+import FieldType from "../../models/abstract/FieldType";
 
 class FieldDashboard extends Component {
+
+  constructor(props) {
+    super(props);
+    // this.state = {value: 'coconut'};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   milkCows = () => {
     for (var i=0; i<this.props.field.contents.length; i++) {
@@ -62,11 +71,23 @@ class FieldDashboard extends Component {
     }
   }
 
+  handleChange(event) {
+    this.props.field.type = event.target.value
+  }
+
+  handleSubmit(event) {
+  }
+
   render() {
     return (
       <div className="FieldDashboard">
         <h2>Field</h2>
-        <p>Field Type: {this.props.field.type} <br/></p>
+        <p>Field Type: {this.props.field.type}</p>
+        <select value={this.props.field.type} onChange={this.handleChange}>
+          <option value={FieldType.Grazing}>Grazing</option>
+          <option value={FieldType.Infrastructure}>Infrastructure</option>
+          <option selected value={FieldType.Planting}>Planting</option>
+        </select>
         {this.props.field.contents[0] && (
           <p>
             In this field you have {this.props.field.contents.length}{" "}
