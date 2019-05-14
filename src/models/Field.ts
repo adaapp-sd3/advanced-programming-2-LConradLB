@@ -5,12 +5,14 @@ import Cow from "./animals/Cow";
 import FieldType from "./abstract/FieldType";
 import Infrastructure from "./abstract/Infrastructure";
 import { instanceOf } from "prop-types";
+import Farm from "./Farm";
 
 class Field extends Drawable {
   image: any
   contents: any[]
   fillColour: string = ""
   type: FieldType = FieldType.Grazing
+  farm: Farm
 
   constructor(
     xPos: number,
@@ -19,7 +21,8 @@ class Field extends Drawable {
     h: number,
     initalContents: any[] = [],
     fillColour: string = "#b58969",
-    type: FieldType = FieldType.Grazing
+    type: FieldType = FieldType.Grazing,
+    farm: Farm
   ) {
     super()
     this.width = w
@@ -29,6 +32,7 @@ class Field extends Drawable {
     this.contents = initalContents
     this.fillColour = fillColour
     this.type = type
+    this.farm = farm
   }
 
   public draw() {
@@ -73,11 +77,7 @@ class Field extends Drawable {
   }
 
   placeInfrastructure(x: number, y: number, name: string){
-      let inf = new Infrastructure(name)
-      inf.p5 = this.p5
-      inf.preload()
-      inf.setRandomPositionInField(this.x, this.y, this.width, this.height)
-      this.contents.push(inf)
+      this.farm.createInfrastructure()
   }
 }
 

@@ -7,28 +7,25 @@ enum TypeOfInfrastructure{
 }
 
 class Infrastructure extends ConstrainedByField {
-    name = ""
+    name = "Solar Panel"
     height = 16
     width = 16
     health: number = 10
     type: TypeOfInfrastructure = TypeOfInfrastructure.SolarPanel
-    imageUrl: string = "/img/twtr/1f413.png" //1f4bb
-    // farm: Farm
+    imageUrl: string = "/img/twtr/1f4bb.png" //1f4bb
+    
+    farm: Farm
 
-    constructor(name: string){//, farm: Farm){ 
+    constructor(farm: Farm){ 
         super()
-        // this.farm = farm
-        this.name = name 
+        this.farm = farm
+        // this.name = name 
     }
 
     public draw() {
         this.constrainItem()
-        this.p5.image(
-            this.p5Img,
-            this.x,
-            this.y,
-            this.width,
-            this.height) 
+
+        this.stopForFarmer()
     }
 
     public preload() {

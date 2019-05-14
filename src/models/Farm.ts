@@ -4,6 +4,7 @@ import Cow from "./animals/Cow"
 import Sheep from "./animals/Sheep"
 import Chicken from "./animals/Chicken"
 import FieldType from "./abstract/FieldType";
+import Infrastructure from "./abstract/Infrastructure";
 class Farm extends Drawable {
   fields: Field[] = []
   width: number = 700
@@ -86,7 +87,8 @@ class Farm extends Drawable {
     solarPanels: any = {
       name: "Solar Panels",
       total: 0,
-      unit: "units"
+      unit: "units",
+      objects: []
     },
     greenGas: any = {
       name: "Green Gas",
@@ -145,6 +147,14 @@ class Farm extends Drawable {
       this.chickens.objects.push(chicken)
   }
 
+  createInfrastructure(){
+    let inf = new Infrastructure(this)
+    inf.p5 = this.p5
+    inf.p5Img = this.p5.loadImage("/img/twtr/solarPanel.png")
+    inf.setRandomPositionInField(475, 25, 200, 325)
+    this.solarPanels.objects.push(inf)
+  }
+
   private createBasicFarm = () => {
     let firstFieldX = 25
     let firstFieldY = 25
@@ -173,12 +183,14 @@ class Farm extends Drawable {
         firstFieldW,
         firstFieldH,
         this.cows.objects,
-        "#065535"
+        "#065535",
+        FieldType.Grazing,
+        this
       )
     )
-    this.fields.push(new Field(25, 275, 350, 125, this.sheep.objects, "#065535"))
-    this.fields.push(new Field(475, 25, 200, 325,[],"#ff8969", FieldType.Infrastructure))
-    this.fields.push(new Field(25, 450, 300, 125, this.chickens.objects, "", FieldType.Grazing))
+    this.fields.push(new Field(25, 275, 350, 125, this.sheep.objects, "#065535", FieldType.Grazing, this))
+    this.fields.push(new Field(475, 25, 200, 325,this.solarPanels.objects,"#ff8969", FieldType.Grazing, this))
+    this.fields.push(new Field(25, 450, 300, 125, this.chickens.objects, "", FieldType.Grazing, this))
     for (let field of this.fields) {
       field.p5 = this.p5
       field.setHandleUpdate = this.updateUI
