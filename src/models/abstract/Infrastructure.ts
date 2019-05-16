@@ -6,10 +6,11 @@ enum TypeOfInfrastructure{
     GreenGasGenerator
 }
 
-class Infrastructure extends ConstrainedByField {
-    name = "Solar Panel"
-    height = 16
-    width = 16
+class SolarPanel extends ConstrainedByField {
+    genus: string = "Infrastructure"
+    name: string  = "Solar Panel"
+    height: number = 16
+    width: number = 16
     health: number = 10
     type: TypeOfInfrastructure = TypeOfInfrastructure.SolarPanel
     imageUrl: string = "/img/twtr/1f4bb.png" //1f4bb
@@ -33,4 +34,4 @@ class Infrastructure extends ConstrainedByField {
     }
 
 }
-export default Infrastructure;
+export default SolarPanel;

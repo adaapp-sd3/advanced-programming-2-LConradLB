@@ -7,6 +7,7 @@ class FieldDashboard extends Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleContentChange = this.handleContentChange.bind(this);
   }
 
   milkCows = () => {
@@ -70,7 +71,12 @@ class FieldDashboard extends Component {
   }
 
   handleChange(event) {
-    this.props.field.type =  event.target.value
+    this.props.field.type = event.target.value
+    this.props.field.changeMadeToField()
+  }
+
+  handleContentChange(event) {
+    this.props.field.changeContentOfField(event.target.value)
   }
 
   render() {
@@ -82,6 +88,14 @@ class FieldDashboard extends Component {
             <option value={FieldType.Grazing}>Grazing</option>
             <option value={FieldType.Infrastructure}>Infrastructure</option>
             <option value={FieldType.Planting}>Planting</option>
+        </select>
+
+        <p>Field Content: {this.props.field.contentType} <br/></p>
+        <select value={this.props.field.contentType} onChange={this.handleContentChange}>
+            <option value="Cows">Cows</option>
+            <option value="Chicken">Chicken</option>
+            <option value="Sheep">Sheep</option>
+            <option value="SolarPanel">Solar Panel</option>
         </select>
         {this.props.field.contents[0] && (
           <p>

@@ -4,7 +4,7 @@ import Cow from "./animals/Cow"
 import Sheep from "./animals/Sheep"
 import Chicken from "./animals/Chicken"
 import FieldType from "./abstract/FieldType";
-import Infrastructure from "./abstract/Infrastructure";
+import SolarPanel from "./abstract/Infrastructure";
 class Farm extends Drawable {
   fields: Field[] = []
   width: number = 700
@@ -117,38 +117,52 @@ class Farm extends Drawable {
     this.createBasicFarm()
   }
 
-  createSheep(){
+  createSheep(setup:boolean){
     let sheep = new Sheep(this)
     sheep.p5 = this.p5
     sheep.preload()
-    sheep.setRandomPositionInField(25, 275, 350, 125)
+    if(setup){
+      sheep.setRandomPositionInField(25, 275, 350, 125)
+    } else {
+      let field = this.findFieldForType("Sheep")
+      if(field == null){ return }
+      sheep.setRandomPositionInField(field.x, field.y, field.width, field.height)
+    }
     this.sheep.objects.push(sheep)
   }
 
-  createCow(){
+  createCow(setup:boolean){
     let cow = new Cow(this)
       cow.p5 = this.p5
       cow.preload()
-      cow.setRandomPositionInField(
-        25,
-        25,
-        250,
-        175
-      )
+      if(setup){
+        cow.setRandomPositionInField(25, 25, 250, 175)
+      } else {
+        let field = this.findFieldForType("Cow")
+        if(field == null){ return }
+        cow.setRandomPositionInField(field.x, field.y, field.width, field.height)
+      }
       this.cows.objects.push(cow)
   }
 
-  createChicken(){
+  createChicken(setup:boolean){
+
     let chicken = new Chicken(this)
       chicken.p5 = this.p5
       chicken.preload()
-      chicken.setRandomPositionInField(25, 450, 300, 125)
+      if(setup){
+        chicken.setRandomPositionInField(25, 450, 300, 125)
+      }else{
+        let field = this.findFieldForType("Chicken")
+        if(field == null){ return }
+        chicken.setRandomPositionInField(field.x, field.y, field.width, field.height)
+      }
       
       this.chickens.objects.push(chicken)
   }
 
   createInfrastructure(){
-    let inf = new Infrastructure(this)
+    let inf = new SolarPanel(this)
     inf.p5 = this.p5
     inf.p5Img = this.p5.loadImage("/img/twtr/solarPanel.png")
     inf.setRandomPositionInField(475, 25, 200, 325)
@@ -163,17 +177,17 @@ class Farm extends Drawable {
 
     //Cows
     for (let i = 0; i < this.cows.total; i++) {
-      this.createCow()
+      this.createCow(true)
     }
 
     //Sheep
     for (let i = 0; i < this.sheep.total; i++) {
-    this.createSheep()
+    this.createSheep(true)
     }
 
     //Chicken
     for (let i = 0; i < this.chickens.total; i++) {
-      this.createChicken()
+      this.createChicken(true)
     }
 
     this.fields.push(
@@ -185,15 +199,27 @@ class Farm extends Drawable {
         this.cows.objects,
         "#065535",
         FieldType.Grazing,
-        this
+        this,
+        "Cows"
       )
     )
-    this.fields.push(new Field(25, 275, 350, 125, this.sheep.objects, "#065535", FieldType.Grazing, this))
-    this.fields.push(new Field(475, 25, 200, 325,this.solarPanels.objects,"#ff8969", FieldType.Grazing, this))
-    this.fields.push(new Field(25, 450, 300, 125, this.chickens.objects, "", FieldType.Grazing, this))
+    this.fields.push(new Field(25, 275, 350, 125, this.sheep.objects, "#065535", FieldType.Grazing, this, "Sheep"))
+    this.fields.push(new Field(475, 25, 200, 325,this.solarPanels.objects,"#ff8969", FieldType.Grazing, this, "SolarPanel"))
+    this.fields.push(new Field(25, 450, 300, 125, this.chickens.objects, "", FieldType.Grazing, this, "Chicken"))
     for (let field of this.fields) {
       field.p5 = this.p5
       field.setHandleUpdate = this.updateUI
+    }
+  }
+
+  findFieldForType(type: String){
+    let field =  this.fields.find(function(field) {
+      return field.contentType == type;
+    }) 
+    if(field){
+      return field
+    }else{
+      return null
     }
   }
 

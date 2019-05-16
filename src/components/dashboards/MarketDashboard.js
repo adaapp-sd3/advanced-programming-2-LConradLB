@@ -46,7 +46,7 @@ class MarketDashboard extends Component {
     }
 
     if(item === "chicken"){
-      if(this.props.market.currentFarmer.budget > this.props.market.animal_eggPrice){
+      if(this.props.market.currentFarmer.budget > this.props.market.animal_chickenPrice){
         this.props.market.currentFarmer.myFarm.chickens.total += 1
         let amount = 1
         this.props.market.currentFarmer.myFarm.createChicken()
