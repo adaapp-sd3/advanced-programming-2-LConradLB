@@ -13,7 +13,6 @@ class MarketDashboard extends Component {
 
     if(item === "solarPanel"){
       if(this.props.market.currentFarmer.budget > this.props.market.solarPanelPrice){
-        this.props.market.currentFarmer.myFarm.solarPanels.total += 1
         let amount = 1
         this.props.market.currentFarmer.budget -= amount * this.props.market.solarPanelPrice
       }
@@ -29,7 +28,6 @@ class MarketDashboard extends Component {
 
     if(item === "sheep"){
       if(this.props.market.currentFarmer.budget > this.props.market.animal_sheepPrice){
-        this.props.market.currentFarmer.myFarm.sheep.total += 1
         let amount = 1
         this.props.market.currentFarmer.myFarm.createSheep()
         this.props.market.currentFarmer.budget -= amount * this.props.market.animal_sheepPrice
@@ -38,7 +36,6 @@ class MarketDashboard extends Component {
 
     if(item === "cow"){
       if(this.props.market.currentFarmer.budget > this.props.market.animal_cowPrice){
-        this.props.market.currentFarmer.myFarm.cows.total += 1
         let amount = 1
         this.props.market.currentFarmer.myFarm.createCow()
         this.props.market.currentFarmer.budget -= amount * this.props.market.animal_cowPrice
@@ -47,7 +44,6 @@ class MarketDashboard extends Component {
 
     if(item === "chicken"){
       if(this.props.market.currentFarmer.budget > this.props.market.animal_chickenPrice){
-        this.props.market.currentFarmer.myFarm.chickens.total += 1
         let amount = 1
         this.props.market.currentFarmer.myFarm.createChicken()
         this.props.market.currentFarmer.budget -= amount * this.props.market.animal_chickenPrice
