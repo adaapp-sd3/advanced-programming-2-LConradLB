@@ -8,22 +8,24 @@ import Farmer from "./models/Farmer"
 import Market from "./models/Market"
 import * as util from 'util'
 const JSON = require('circular-json');
+let request = require('request');
 
 var saveFlag =  false
 
 class App extends Component {
   
+
   // all instances live on the state
   state = {
     farmer: new Farmer(),
     farm: new Farm(),
-    market: new Market()
+    market: new Market(),
+    showWeatherIcon: Boolean = false
   }
 
   // allow instances to to tell us when they change
   handleUpdateState = newThing => {
     
-    // console.log(this, newThing)
     if(saveFlag){
       // this.setState(JSON.parse(localStorage.getItem("farmState")))
       let state = JSON.parse(localStorage.getItem("farmState"))
@@ -78,12 +80,30 @@ class App extends Component {
     this.setState({
       myP5: new p5(sketch, "sketch")
     })
-
+    this.queryWeather()
     // console.log("SESSION STORAGE", localStorage.getItem('farmState'))
     // if(localStorage.getItem('farmState')){
     //   console.log("attempting set state")
     //   this.state.farm = JSON.parse(localStorage.getItem('farmState'))
     // }
+
+  }
+
+  queryWeather() {
+    let url = "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=09a601738f81bf9c20b9fb5b5d380123"
+    let strongSelf = this
+    request(url, function (err, response, body) {
+      if(err){
+        console.log('error:', err);
+      } else {
+        let imageElement = strongSelf.refs.WeatherIcon
+        let json = JSON.parse(body)
+
+        strongSelf.setState({imgSrc: "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png"})
+        strongSelf.setState({ value : (Math.round(json.main.temp - 273.15) + "°C", json.weather[0].main) })
+        strongSelf.setState({showWeatherIcon: true})
+      }
+    });
   }
 
   render() {
@@ -96,6 +116,10 @@ class App extends Component {
           </h2>
           <button className="Button" onClick={this.saveGame.bind(this)}>Save Game</button>
           <button className="Button" onClick={this.loadGame.bind(this)}>Load Game</button>
+          <div className="Weather">
+            <h3 ref="WeatherTemp">{this.state && this.state.value}</h3>
+            {this.state.showWeatherIcon && <img ref="WeatherIcon" alt="Weather" src={this.state.imgSrc}></img>}
+          </div>
         </header>
         <FarmManager farmer={this.state.farmer} farm={this.state.farm} market={this.state.market} />
       </div>

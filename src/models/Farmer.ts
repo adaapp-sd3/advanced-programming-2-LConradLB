@@ -53,12 +53,10 @@ class Farmer extends Drawable {
         this.farmerCurrentLocation = field
         field.farmerPresent = true
         if(field.type === FieldType.Infrastructure){
-          if(this.myFarm.solarPanels.total > 0){
-            if(this.myFarm.solarPanels.total > 0){
+            if(this.myFarm.solarPanels.totalBought > 0){
               field.placeInfrastructure(this.x, this.y, "solar panel")
-              this.myFarm.solarPanels.total -= 1
+              this.myFarm.solarPanels.totalBought -= 1
             }
-          }
         }
       } else {
         field.farmerPresent = false

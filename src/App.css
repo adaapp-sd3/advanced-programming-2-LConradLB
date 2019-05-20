@@ -98,3 +98,14 @@
 	-webkit-appearance: none;
 	-webkit-font-smoothing: antialiased;
 }
+
+.Weather{
+  display: inline-flex;
+  font-size: 12pt;
+  margin-left: 12px;
+}
+
+.Weather img {
+  height: 50px;
+  width: 50px;
+}

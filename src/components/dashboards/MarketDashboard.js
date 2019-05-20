@@ -14,6 +14,8 @@ class MarketDashboard extends Component {
     if(item === "solarPanel"){
       if(this.props.market.currentFarmer.budget > this.props.market.solarPanelPrice){
         let amount = 1
+        // this.props.market.currentFarmer.myFarm.createInfrastructure()
+        this.props.market.currentFarmer.myFarm.solarPanels.totalBought += 1
         this.props.market.currentFarmer.budget -= amount * this.props.market.solarPanelPrice
       }
     }

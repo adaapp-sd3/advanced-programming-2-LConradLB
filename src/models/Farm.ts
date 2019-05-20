@@ -85,8 +85,9 @@ class Farm extends Drawable {
       unit: "bunches"
     },
     solarPanels: any = {
-      name: "Solar Panels",
+      name: "SolarPanels",
       total: 0,
+      totalBought: 0,
       unit: "units",
       objects: []
     },
@@ -202,8 +203,19 @@ class Farm extends Drawable {
 
   findFieldForType(type: String){
     let field =  this.fields.find(function(field) {
-      return field.contentType == type;
-    }) 
+      let doesContentTypeMatch = field.contentType == type
+      // let doesContentMatchFieldType = false
+
+      // if(field.contentType == ("Cows" || "Chicken" || "Sheep") && field.type == FieldType.Grazing){
+      //   doesContentMatchFieldType = true
+      // } 
+
+      // if(field.contentType == ("GreenGas" || "SolarPanel") && field.type == FieldType.Infrastructure){
+      //   doesContentMatchFieldType = true
+      // } 
+
+      return doesContentTypeMatch //&& doesContentMatchFieldType;
+    })
     if(field){
       return field
     }else{
