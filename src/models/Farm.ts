@@ -121,12 +121,10 @@ class Farm extends Drawable {
     let sheep = new Sheep(this)
     sheep.p5 = this.p5
     sheep.preload()
-    if(setup){
-      sheep.setRandomPositionInField(25, 275, 350, 125)
-    } else {
+    if(!setup){
       let field = this.findFieldForType("Sheep")
       if(field == null){ return }
-      sheep.setRandomPositionInField(field.x, field.y, field.width, field.height)
+      field.contents.push(sheep)
     }
     this.sheep.objects.push(sheep)
   }
@@ -135,12 +133,10 @@ class Farm extends Drawable {
     let cow = new Cow(this)
       cow.p5 = this.p5
       cow.preload()
-      if(setup){
-        cow.setRandomPositionInField(25, 25, 250, 175)
-      } else {
+      if(!setup){
         let field = this.findFieldForType("Cow")
         if(field == null){ return }
-        cow.setRandomPositionInField(field.x, field.y, field.width, field.height)
+        field.contents.push(cow)
       }
       this.cows.objects.push(cow)
   }
@@ -150,12 +146,10 @@ class Farm extends Drawable {
     let chicken = new Chicken(this)
       chicken.p5 = this.p5
       chicken.preload()
-      if(setup){
-        chicken.setRandomPositionInField(25, 450, 300, 125)
-      }else{
+      if(!setup){
         let field = this.findFieldForType("Chicken")
         if(field == null){ return }
-        chicken.setRandomPositionInField(field.x, field.y, field.width, field.height)
+        field.contents.push(chicken)
       }
       
       this.chickens.objects.push(chicken)
@@ -165,7 +159,6 @@ class Farm extends Drawable {
     let inf = new SolarPanel(this)
     inf.p5 = this.p5
     inf.p5Img = this.p5.loadImage("/img/twtr/solarPanel.png")
-    inf.setRandomPositionInField(475, 25, 200, 325)
     this.solarPanels.objects.push(inf)
   }
 
@@ -190,19 +183,7 @@ class Farm extends Drawable {
       this.createChicken(true)
     }
 
-    this.fields.push(
-      new Field(
-        firstFieldX,
-        firstFieldY,
-        firstFieldW,
-        firstFieldH,
-        this.cows.objects,
-        "#065535",
-        FieldType.Grazing,
-        this,
-        "Cows"
-      )
-    )
+    this.fields.push(new Field(firstFieldX, firstFieldY, firstFieldW, firstFieldH, this.cows.objects, "#065535", FieldType.Grazing, this, "Cows"))
     this.fields.push(new Field(25, 275, 350, 125, this.sheep.objects, "#065535", FieldType.Grazing, this, "Sheep"))
     this.fields.push(new Field(475, 25, 200, 325,this.solarPanels.objects,"#ff8969", FieldType.Grazing, this, "SolarPanel"))
     this.fields.push(new Field(25, 450, 300, 125, this.chickens.objects, "", FieldType.Grazing, this, "Chicken"))

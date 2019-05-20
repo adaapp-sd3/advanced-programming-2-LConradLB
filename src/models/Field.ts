@@ -54,9 +54,8 @@ class Field extends Drawable {
 
     this.contents.forEach((item, index) => {
       item.draw()
-
-      if(item instanceof Infrastructure){
-        
+      if(item.fieldX == null || item.fieldY == null){
+        item.setRandomPositionInField(this.x, this.y, this.width, this.height)
       }
     })
 
@@ -151,39 +150,56 @@ class Field extends Drawable {
       return el != null;
     });
 
+    this.contents = filtered
+
     let strongSelf = this
+    let newFilteredArray = []
     switch(oldContent){
       case "Cows": 
       this.farm.cows.total = this.farm.cows.total - this.contents.length;
-      this.farm.cows.objects = this.farm.cows.objects.filter(function(el) {
-        return !((el.xPos > strongSelf.x && el.xPos > strongSelf.x + strongSelf.width) && (el.yPos > strongSelf.y && el.yPos > strongSelf.y + strongSelf.height))
+      newFilteredArray = this.farm.cows.objects.filter(function(el: Cow) {
+        console.log("i")
+        if(el == null) {return} 
+        return !((el.x > strongSelf.x && el.x > strongSelf.x + strongSelf.width) && (el.y > strongSelf.y && el.y > strongSelf.y + strongSelf.height))
       })
+      this.farm.cows.objects = newFilteredArray
+      // console.log("filtered Array")
+      // console.log(newFilteredArray)
+
+      // console.log("objects")
+      // console.log(this.farm.cows.objects)
       return
 
       case "Chicken": 
       this.farm.chickens.total = this.farm.chickens.total - this.contents.length;
-      this.farm.chickens.objects = this.farm.chickens.objects.filter(function(el) {
-        return !((el.xPos > strongSelf.x && el.xPos > strongSelf.x + strongSelf.width) && (el.yPos > strongSelf.y && el.yPos > strongSelf.y + strongSelf.height))
+      
+      newFilteredArray = this.farm.chickens.objects.filter(function(el: Drawable) {
+        if(el == null) {return} 
+        return !((el.x > strongSelf.x && el.x > strongSelf.x + strongSelf.width) && (el.y > strongSelf.y && el.y > strongSelf.y + strongSelf.height))
       })
+      this.farm.chickens.objects = newFilteredArray
       return
 
       case "Sheep": 
       this.farm.sheep.total = this.farm.sheep.total - this.contents.length;
-      this.farm.sheep.objects = this.farm.sheep.objects.filter(function(el) {
-        return !((el.xPos > strongSelf.x && el.xPos > strongSelf.x + strongSelf.width) && (el.yPos > strongSelf.y && el.yPos > strongSelf.y + strongSelf.height))
+      
+      newFilteredArray = this.farm.sheep.objects.filter(function(el: Drawable) {
+        if(el == null) {return} 
+        return !((el.x > strongSelf.x && el.x > strongSelf.x + strongSelf.width) && (el.y > strongSelf.y && el.y > strongSelf.y + strongSelf.height))
       })
+      this.farm.sheep.objects =  newFilteredArray
       return
 
       case "Infrastructure": 
       this.farm.solarPanels.total = this.farm.solarPanels.total - this.contents.length;
-      this.farm.solarPanels.objects = this.farm.solarPanels.objects.filter(function(el) {
-        return !((el.xPos > strongSelf.x && el.xPos > strongSelf.x + strongSelf.width) && (el.yPos > strongSelf.y && el.yPos > strongSelf.y + strongSelf.height))
+      
+      newFilteredArray =this.farm.solarPanels.objects.filter(function(el: Drawable) {
+        if(el == null) {return} 
+        return !((el.x > strongSelf.x && el.x > strongSelf.x + strongSelf.width) && (el.y > strongSelf.y && el.y > strongSelf.y + strongSelf.height))
       })
+      this.farm.solarPanels.objects = newFilteredArray
       return
     }
-
-    this.contents = filtered
-
     
 
   }
