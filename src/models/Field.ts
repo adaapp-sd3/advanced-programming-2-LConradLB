@@ -137,6 +137,7 @@ class Field extends Drawable {
   changeContentOfField(newContent: string){
     let oldContent = this.contentType
     this.contentType = newContent
+    let contentLength = this.contents.length;
 
     this.contents.forEach((item, index) => {
     
@@ -156,22 +157,17 @@ class Field extends Drawable {
     let newFilteredArray = []
     switch(oldContent){
       case "Cows": 
-      this.farm.cows.total = this.farm.cows.total - this.contents.length;
+      this.farm.cows.total = this.farm.cows.total - contentLength;
       newFilteredArray = this.farm.cows.objects.filter(function(el: Cow) {
-        console.log("i")
         if(el == null) {return} 
         return !((el.x > strongSelf.x && el.x > strongSelf.x + strongSelf.width) && (el.y > strongSelf.y && el.y > strongSelf.y + strongSelf.height))
       })
       this.farm.cows.objects = newFilteredArray
-      // console.log("filtered Array")
-      // console.log(newFilteredArray)
 
-      // console.log("objects")
-      // console.log(this.farm.cows.objects)
       return
 
       case "Chicken": 
-      this.farm.chickens.total = this.farm.chickens.total - this.contents.length;
+      this.farm.chickens.total = this.farm.chickens.total - contentLength;
       
       newFilteredArray = this.farm.chickens.objects.filter(function(el: Drawable) {
         if(el == null) {return} 
@@ -181,7 +177,7 @@ class Field extends Drawable {
       return
 
       case "Sheep": 
-      this.farm.sheep.total = this.farm.sheep.total - this.contents.length;
+      this.farm.sheep.total = this.farm.sheep.total - contentLength;
       
       newFilteredArray = this.farm.sheep.objects.filter(function(el: Drawable) {
         if(el == null) {return} 
@@ -191,7 +187,7 @@ class Field extends Drawable {
       return
 
       case "Infrastructure": 
-      this.farm.solarPanels.total = this.farm.solarPanels.total - this.contents.length;
+      this.farm.solarPanels.total = this.farm.solarPanels.total - contentLength;
       
       newFilteredArray =this.farm.solarPanels.objects.filter(function(el: Drawable) {
         if(el == null) {return} 

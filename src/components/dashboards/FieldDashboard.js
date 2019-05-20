@@ -77,6 +77,7 @@ class FieldDashboard extends Component {
 
   handleContentChange(event) {
     this.props.field.changeContentOfField(event.target.value)
+    this.props.field.contentType = event.target.value
   }
 
   render() {

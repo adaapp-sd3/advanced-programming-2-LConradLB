@@ -123,8 +123,9 @@ class Farm extends Drawable {
     sheep.preload()
     if(!setup){
       let field = this.findFieldForType("Sheep")
-      if(field == null){ return }
+      if(field == null){ alert("Need a field for sheep"); return }
       field.contents.push(sheep)
+      this.sheep.total += 1
     }
     this.sheep.objects.push(sheep)
   }
@@ -134,8 +135,9 @@ class Farm extends Drawable {
       cow.p5 = this.p5
       cow.preload()
       if(!setup){
-        let field = this.findFieldForType("Cow")
-        if(field == null){ return }
+        let field = this.findFieldForType("Cows")
+        if(field == null){ alert("Need a field for cows"); return }
+        this.cows.total += 1
         field.contents.push(cow)
       }
       this.cows.objects.push(cow)
@@ -148,7 +150,8 @@ class Farm extends Drawable {
       chicken.preload()
       if(!setup){
         let field = this.findFieldForType("Chicken")
-        if(field == null){ return }
+        if(field == null){ alert("Need a field for chickens"); return }
+        this.chickens.total += 1
         field.contents.push(chicken)
       }
       
@@ -159,6 +162,10 @@ class Farm extends Drawable {
     let inf = new SolarPanel(this)
     inf.p5 = this.p5
     inf.p5Img = this.p5.loadImage("/img/twtr/solarPanel.png")
+    let field = this.findFieldForType("SolarPanel")
+    if(field == null){ alert("Need a field for solar panels"); return }
+    this.solarPanels.total += 1
+    field.contents.push(inf)
     this.solarPanels.objects.push(inf)
   }
 
