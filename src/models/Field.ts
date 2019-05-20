@@ -58,20 +58,6 @@ class Field extends Drawable {
         item.setRandomPositionInField(this.x, this.y, this.width, this.height)
       }
     })
-
-    //garbage Collection - remove anything that doesn't below on the field.
-    // let weakSelf = this
-    // var filtered = this.contents.filter(function(item, index, arr){
-    //   if(weakSelf.type == FieldType.Grazing){
-    //     return (item instanceof Animal) 
-    //   }else if(weakSelf.type == FieldType.Planting){
-    //     // return item instanceof Animal
-    //   }else if(weakSelf.type == FieldType.Infrastructure){
-    //     return item instanceof Infrastructure
-    //   }
-    // });
-
-    // this.contents = filtered
   }
 
   filterField(func: Function){
@@ -99,7 +85,7 @@ class Field extends Drawable {
       return el != null;
     });
 
-    this.contents = filtered
+    this.contents = []//filtered
     func()
     
   }
@@ -107,37 +93,18 @@ class Field extends Drawable {
   changeMadeToField(){
     if(this.contents.length > 0){
       let contentType = this.contents[0].genus
+      let contentLength = this.contents.length
       let strongSelf = this
       this.filterField(function() {
-        switch(contentType){
-          case "Cows": 
-          strongSelf.farm.cows.total = strongSelf.contents.length;
-          strongSelf.farm.cows.objects = strongSelf.contents;
-          return
-
-          case "Chicken": 
-          strongSelf.farm.chickens.total = strongSelf.contents.length;
-          strongSelf.farm.chickens.objects = strongSelf.contents;
-          return
-
-          case "Sheep": 
-          strongSelf.farm.sheep.total = strongSelf.contents.length;
-          strongSelf.farm.sheep.objects = strongSelf.contents;
-          return
-
-          case "Infrastructure": 
-          strongSelf.farm.solarPanels.total = strongSelf.contents.length;
-          strongSelf.farm.solarPanels.objects = strongSelf.contents;
-          return
-        }
+        strongSelf.wipeField()
       })
     }
   }
 
   changeContentOfField(newContent: string){
-    let oldContent = this.contentType
+    
     this.contentType = newContent
-    let contentLength = this.contents.length;
+    
 
     this.contents.forEach((item, index) => {
     
@@ -153,6 +120,14 @@ class Field extends Drawable {
 
     this.contents = filtered
 
+    this.wipeField()
+    
+
+  }
+  
+  wipeField(){
+    let oldContent = this.contentType
+    let contentLength = this.contents.length;
     let strongSelf = this
     let newFilteredArray = []
     switch(oldContent){
@@ -196,8 +171,6 @@ class Field extends Drawable {
       this.farm.solarPanels.objects = newFilteredArray
       return
     }
-    
-
   }
 
   plant(x: number, y: number) {
