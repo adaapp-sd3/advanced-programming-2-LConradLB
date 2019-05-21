@@ -63,29 +63,24 @@ class Field extends Drawable {
   filterField(func: Function){
     this.contents.forEach((item, index) => {
       if (this.type == FieldType.Grazing){
-        if(!(item instanceof Animal) /*|| !(item.genus == this.contentType)*/){
+        if(!(item instanceof Animal)){
           this.contents[index] = null
         }
       }
 
       if (this.type == FieldType.Infrastructure){
-        if(!(item instanceof SolarPanel) /*|| !(item.genus == this.contentType) */){
+        if(!(item instanceof SolarPanel)){
           this.contents[index] = null
         }
       }
 
-      // if (this.type == FieldType.Grazing){
-      //   if(!(item instanceof Animal)){
-      //     this.contents[index] = null
-      //   }
-      // }
     })
 
     var filtered = this.contents.filter(function (el) {
       return el != null;
     });
 
-    this.contents = []//filtered
+    this.contents = []
     func()
     
   }
@@ -96,15 +91,15 @@ class Field extends Drawable {
       let contentLength = this.contents.length
       let strongSelf = this
       this.filterField(function() {
-        strongSelf.wipeField()
+        strongSelf.wipeField(contentLength, contentType)
       })
     }
   }
 
   changeContentOfField(newContent: string){
-    
+    let oldContentType = this.contentType 
     this.contentType = newContent
-    
+    let oldContentLength = this.contents.length
 
     this.contents.forEach((item, index) => {
     
@@ -120,14 +115,13 @@ class Field extends Drawable {
 
     this.contents = filtered
 
-    this.wipeField()
+    this.wipeField(oldContentLength, oldContentType)
     
 
   }
   
-  wipeField(){
-    let oldContent = this.contentType
-    let contentLength = this.contents.length;
+  wipeField(contentLength: number, contentType: string){
+    let oldContent = contentType
     let strongSelf = this
     let newFilteredArray = []
     switch(oldContent){

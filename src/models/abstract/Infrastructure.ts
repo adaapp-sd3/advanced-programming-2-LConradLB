@@ -20,7 +20,6 @@ class SolarPanel extends ConstrainedByField {
     constructor(farm: Farm){ 
         super()
         this.farm = farm
-        // this.name = name 
     }
 
     public draw() {

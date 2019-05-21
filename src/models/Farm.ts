@@ -204,17 +204,7 @@ class Farm extends Drawable {
   findFieldForType(type: String){
     let field =  this.fields.find(function(field) {
       let doesContentTypeMatch = field.contentType == type
-      // let doesContentMatchFieldType = false
-
-      // if(field.contentType == ("Cows" || "Chicken" || "Sheep") && field.type == FieldType.Grazing){
-      //   doesContentMatchFieldType = true
-      // } 
-
-      // if(field.contentType == ("GreenGas" || "SolarPanel") && field.type == FieldType.Infrastructure){
-      //   doesContentMatchFieldType = true
-      // } 
-
-      return doesContentTypeMatch //&& doesContentMatchFieldType;
+      return doesContentTypeMatch 
     })
     if(field){
       return field
