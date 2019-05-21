@@ -9,7 +9,7 @@ class FarmerDashboard extends Component {
   render() {
     return (
       <div className="FarmerDashboard">
-        <dl>
+        <dl className="FarmerDashboard-Content">
           <dt>Current budget</dt><dd>{this.props.farmer.budget}</dd>
           {this.props.farmer.myFarm && (<>
             <dt>Total cows</dt><dd>{this.props.farmer.myFarm.cows.total}</dd>
@@ -35,7 +35,7 @@ class FarmerDashboard extends Component {
             </>
           )}
         </dl>
-        <button onClick={this.hideUI}>Hide UI</button>
+        <button className="FarmerDashboard-Content" onClick={this.hideUI}>Hide UI</button>
       </div>
     )
   }

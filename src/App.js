@@ -100,7 +100,7 @@ class App extends Component {
         let json = JSON.parse(body)
 
         strongSelf.setState({imgSrc: "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png"})
-        strongSelf.setState({ value : (Math.round(json.main.temp - 273.15) + "°C", json.weather[0].main) })
+        strongSelf.setState({ value : (Math.round(json.main.temp - 273.15) + "°C ") + json.weather[0].main })
         strongSelf.setState({showWeatherIcon: true})
       }
     });

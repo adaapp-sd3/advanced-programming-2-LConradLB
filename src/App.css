@@ -36,7 +36,18 @@
 .FarmerDashboard {
   min-width:30%;
   width: 2vmin;
-  background-color: red;
+  background-color: #282c34;
+  border-radius: 0px 0px 30px 0px;
+  color: white;
+  text-align: left;
+}
+
+.FarmerDashboard button {
+  text-align: center;
+}
+
+.FarmerDashboard-Content{
+  margin-left: 40px;
 }
 
 .MarketProducts{
