@@ -1,6 +1,9 @@
 # Time Sheet
 ## Total Time: 33.6 hours worth of work
 
+N.B. Quite a lot of time was spent trying to get save/Load game working. 
+However due to the absurd number of circular references, this feature was not implemented.
+
 ### (1 hours)
 commit e23e0ebcfa9554b9aaee175aeda3b793ab0201f8
 Date:   Wed May 22 09:02:58 2019 +0100

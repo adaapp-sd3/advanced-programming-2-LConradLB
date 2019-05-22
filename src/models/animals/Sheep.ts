@@ -42,7 +42,6 @@ class Sheep extends Animal {
 
   public preload() {
     this.p5Img = this.p5.loadImage(this.imgUrl)
-    // console.log(this.p5Img)
   }
 
   makeSound() {
