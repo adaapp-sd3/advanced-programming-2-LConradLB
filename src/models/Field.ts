@@ -164,15 +164,21 @@ class Field extends Drawable {
       })
       this.farm.solarPanels.objects = newFilteredArray
       return
+
+      case "Plant": 
+      this.farm.solarPanels.total = this.farm.solarPanels.total - contentLength;
+      
+      newFilteredArray =this.farm.solarPanels.objects.filter(function(el: Drawable) {
+        if(el == null) {return} 
+        return !((el.x > strongSelf.x && el.x > strongSelf.x + strongSelf.width) && (el.y > strongSelf.y && el.y > strongSelf.y + strongSelf.height))
+      })
+      this.farm.solarPanels.objects = newFilteredArray
+      return
     }
   }
 
   plant(x: number, y: number) {
-    console.log("new plant")
-    // Get the crop name from the field name
-    // var cropName = this.name.split(" ") // => e.g. "Wheat"
-    // // Add a new crop to the field's list of crops
-    // this.crops.push(new Crop(cropName[0], this, x, y))
+    this.farm.createPlant()
   }
 
   placeInfrastructure(x: number, y: number, name: string){

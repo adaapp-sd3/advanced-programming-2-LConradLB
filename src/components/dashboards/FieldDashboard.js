@@ -97,6 +97,7 @@ class FieldDashboard extends Component {
             <option value="Chicken">Chicken</option>
             <option value="Sheep">Sheep</option>
             <option value="SolarPanel">Solar Panel</option>
+            <option value="Plant">Plant</option>
         </select>
         {this.props.field.contents[0] && (
           <p>

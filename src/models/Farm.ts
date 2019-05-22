@@ -5,6 +5,7 @@ import Sheep from "./animals/Sheep"
 import Chicken from "./animals/Chicken"
 import FieldType from "./abstract/FieldType";
 import SolarPanel from "./abstract/Infrastructure";
+import Plant from "./abstract/Plant";
 class Farm extends Drawable {
   fields: Field[] = []
   width: number = 700
@@ -23,6 +24,7 @@ class Farm extends Drawable {
   seeds: any
   solarPanels: any
   greenGas: any
+  plants: any
   constructor(
     cows: any = {
       name: "Cows",
@@ -95,6 +97,12 @@ class Farm extends Drawable {
       name: "Green Gas",
       total: 0,
       unit: "litres"
+    },
+    plants: any = {
+      name: "Plant",
+      total: 0,
+      unit: "plants",
+      objects: []
     }
   ) {
     super()
@@ -112,6 +120,7 @@ class Farm extends Drawable {
     this.chicken = chicken
     this.solarPanels = solarPanels
     this.greenGas = greenGas
+    this.plants = plants
   }
 
   public preload() {
@@ -168,6 +177,17 @@ class Farm extends Drawable {
     this.solarPanels.total += 1
     field.contents.push(inf)
     this.solarPanels.objects.push(inf)
+  }
+
+  createPlant(){
+    let plant = new Plant(this)
+    plant.p5 = this.p5
+    plant.p5Img = this.p5.loadImage("/img/twtr/1f33f.png")
+    let field = this.findFieldForType("Plant")
+    if(field == null){ alert("Need a field for plants"); return }
+    this.plants.total += 1
+    field.contents.push(plant)
+    this.plants.objects.push(plant)
   }
 
   private createBasicFarm = () => {

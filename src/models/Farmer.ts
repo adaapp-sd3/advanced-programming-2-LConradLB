@@ -58,6 +58,12 @@ class Farmer extends Drawable {
               this.myFarm.solarPanels.totalBought -= 1
             }
         }
+        if(field.type === FieldType.Planting){
+          if(this.myFarm.seeds.total > 0){
+            field.plant(this.x, this.y)
+            this.myFarm.seeds.total -= 1
+          }
+      }
       } else {
         field.farmerPresent = false
       }
