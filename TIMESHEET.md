@@ -1,5 +1,11 @@
 # Time Sheet
-## Total Time: 32.6 hours worth of work
+## Total Time: 33.6 hours worth of work
+
+### (1 hours)
+commit e23e0ebcfa9554b9aaee175aeda3b793ab0201f8
+Date:   Wed May 22 09:02:58 2019 +0100
+
+    Feature - Added the ability to plant plants in fields of type Planting and content type of Plant.
 
 ### (.1 hours)
 Date:   Wed May 22 00:02:14 2019 +0100
